@@ -1,0 +1,23 @@
+// screens/Messages.tsx
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function Messages() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Tin nhắn</Text>
+      <Text style={styles.text}>Danh sách chat để sau nha.</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0B0B0C',
+    padding: 24,
+    paddingTop: 60,
+  },
+  title: { color: '#fff', fontSize: 26, fontWeight: '700', marginBottom: 8 },
+  text: { color: 'rgba(255,255,255,0.6)' },
+});
