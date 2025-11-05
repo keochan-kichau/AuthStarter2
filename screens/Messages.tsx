@@ -6,7 +6,7 @@ export default function Messages() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tin nhắn</Text>
-      <Text style={styles.text}>Danh sách chat để sau nha.</Text>
+      <Text style={styles.text}>Nơi để nhắn tin nì.</Text>
     </View>
   );
 }

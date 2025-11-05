@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home 🌌</Text>
-      <Text style={styles.text}>Chọn icon bên dưới để chuyển màn nha.</Text>
+      <Text style={styles.text}>Chọn icon bên dưới để chuyển màn.</Text>
     </View>
   );
 }

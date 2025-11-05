@@ -9,9 +9,7 @@ export default function Onboarding1({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bloom App ✨</Text>
-      <Text style={styles.subtitle}>
-        Ứng dụng demo. Vuốt thì chưa làm, bấm nút thôi 😎
-      </Text>
+      <Text style={styles.subtitle}>Ứng dụng demo 😎</Text>
 
       <TouchableOpacity
         style={styles.primaryBtn}

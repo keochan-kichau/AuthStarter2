@@ -6,7 +6,7 @@ export default function Photos() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ảnh</Text>
-      <Text style={styles.text}>Hiển thị gallery ở đây.</Text>
+      <Text style={styles.text}>Chỗ ni đựng thư viện ảnh.</Text>
     </View>
   );
 }

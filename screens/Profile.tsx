@@ -6,7 +6,7 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hồ sơ</Text>
-      <Text style={styles.text}>Chỗ này bạn tự thêm form sau.</Text>
+      <Text style={styles.text}>Chỗ ni để thông tin cá nhân.</Text>
     </View>
   );
 }
