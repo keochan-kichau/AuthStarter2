@@ -1,17 +1,17 @@
-// screens/Home.tsx
+// screens/Buying.tsx
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import BottomBar, { BottomTabKey } from '../components/BottomBar';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/RootNavigator';
+import BottomBar, { BottomTabKey } from '../components/BottomBar';
 import NeonButton from '../components/NeonButton';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Buying'>;
 
-export default function Home({ navigation }: Props) {
-  const [active, setActive] = useState<BottomTabKey>('home');
+export default function Buying({ navigation }: Props) {
+  const [active, setActive] = useState<BottomTabKey>('buying');
 
   const handleTabPress = async (key: BottomTabKey) => {
     setActive(key);
@@ -20,9 +20,9 @@ export default function Home({ navigation }: Props) {
         navigation.navigate('Profile');
         break;
       case 'buying':
-        navigation.navigate('Buying');
         break;
       case 'home':
+        navigation.navigate('Home');
         break;
       case 'bills':
         navigation.navigate('Bills');
@@ -40,19 +40,21 @@ export default function Home({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Xin chào 👋</Text>
+        <Text style={styles.title}>Mua sắm</Text>
         <Text style={styles.subtitle}>
-          Đây là màn Home sau đăng nhập. Dùng thanh điều hướng phía dưới để
-          chuyển giữa Profile, Mua sắm, Bills hoặc Logout.
+          Đây là hub Mua sắm. Bạn có thể vào Chọn hàng hoặc đi thẳng sang Thanh
+          toán.
         </Text>
 
         <NeonButton
-          label="Đi tới Mua sắm"
-          onPress={() => {
-            setActive('buying');
-            navigation.navigate('Buying');
-          }}
+          label="Chọn hàng"
+          onPress={() => navigation.navigate('Shop')}
           style={{ marginTop: 24 }}
+        />
+        <NeonButton
+          label="Thanh toán"
+          onPress={() => navigation.navigate('Checkout')}
+          style={{ marginTop: 12 }}
         />
       </View>
 
@@ -68,11 +70,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 48,
   },
-  title: { fontSize: 26, fontWeight: '700', color: '#111827' },
+  title: { fontSize: 24, fontWeight: '700', color: '#111827' },
   subtitle: {
-    marginTop: 12,
-    fontSize: 15,
-    color: '#4b5563',
+    marginTop: 8,
+    color: '#6b7280',
     lineHeight: 22,
   },
 });

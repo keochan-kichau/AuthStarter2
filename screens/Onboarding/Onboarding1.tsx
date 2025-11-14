@@ -1,51 +1,47 @@
-// screens/Onboarding1.tsx
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import type { RootScreenProps } from '../../App';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import AnimatedLogo from '../../components/AnimatedLogo';
+import NeonButton from '../../components/NeonButton';
+import { colors, spacing } from '../../theme/tokens';
 
-export default function Onboarding1({
-  navigation,
-}: RootScreenProps<'Onboarding1'>) {
+export default function Onboarding1({ navigation }: any) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Bloom App ✨</Text>
-      <Text style={styles.subtitle}>Ứng dụng demo 😎</Text>
-
-      <TouchableOpacity
-        style={styles.primaryBtn}
-        onPress={() => navigation.navigate('Login')}
-      >
-        <Text style={styles.primaryText}>Bắt đầu</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-        <Text style={styles.link}>Tạo tài khoản mới</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.wrap}>
+      <View style={styles.top}>
+        <AnimatedLogo />
+        <Text style={styles.title}>Xin chào 👋</Text>
+        <Text style={styles.body}>
+          Ứng dụng neon + glass.\nVuốt tiếp để khám phá.
+        </Text>
+      </View>
+      <View style={styles.bottom}>
+        <NeonButton
+          label="Tiếp"
+          onPress={() => navigation.navigate('Onboarding2')}
+        />
+        <Text style={styles.link} onPress={() => navigation.replace('Login')}>
+          Bỏ qua
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrap: {
     flex: 1,
-    backgroundColor: '#0B0B0C',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 24,
+    backgroundColor: colors.bg,
+    padding: spacing(2),
+    justifyContent: 'space-between',
   },
-  title: { color: '#fff', fontSize: 30, fontWeight: '700', marginBottom: 8 },
-  subtitle: {
-    color: 'rgba(255,255,255,0.6)',
-    textAlign: 'center',
-    marginBottom: 24,
+  top: { alignItems: 'center', marginTop: spacing(4) },
+  title: {
+    color: colors.white,
+    fontSize: 28,
+    fontWeight: '800',
+    marginTop: spacing(2),
   },
-  primaryBtn: {
-    backgroundColor: '#00FFF0',
-    paddingHorizontal: 36,
-    paddingVertical: 12,
-    borderRadius: 24,
-    marginBottom: 12,
-  },
-  primaryText: { color: '#000', fontWeight: '700', fontSize: 16 },
-  link: { color: '#fff', textDecorationLine: 'underline' },
+  body: { color: colors.gray300, textAlign: 'center', marginTop: spacing(1) },
+  bottom: { alignItems: 'center', gap: spacing(1) },
+  link: { color: colors.cyan, marginTop: spacing(1) },
 });
