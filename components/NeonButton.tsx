@@ -43,7 +43,7 @@ export default function NeonButton({ label, onPress, style, disabled }: Props) {
 
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: colors.cyan,
+    backgroundColor: colors.blue,
     paddingVertical: spacing(1.5),
     paddingHorizontal: spacing(2),
     borderRadius: radius.md,
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     elevation: 6,
     alignItems: 'center',
+    top: -20,
   },
-  txt: { color: '#0B0B0C', fontWeight: '800', fontSize: 16 },
+  txt: { color: colors.white, fontWeight: '800', fontSize: 16 },
 });

@@ -1,24 +1,24 @@
-// RootNavigator.tsx
-import React from 'react';
+// navigation/RootNavigator.tsx
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
 
-// === ONBOARDING ===
 import Onboarding1 from '../screens/Onboarding/Onboarding1';
 import Onboarding2 from '../screens/Onboarding/Onboarding2';
 import Onboarding3 from '../screens/Onboarding/Onboarding3';
 
-// === AUTH ===
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import Forgot from '../screens/Forgot';
 
-// === APP ===
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
-import Buying from '../screens/Buying';
-import Shop from '../screens/Shop';
-import Checkout from '../screens/Checkout';
-import Bills from '../screens/Bills';
+import Chat from '../screens/Chat';
+import Notifications from '../screens/Notifications';
+// nếu còn Buying / Shop / Checkout / Bills thì import thêm
 
 export type RootStackParamList = {
   Onboarding1: undefined;
@@ -31,39 +31,69 @@ export type RootStackParamList = {
 
   Home: undefined;
   Profile: undefined;
-  Buying: undefined;
-  Shop: undefined;
-  Checkout: undefined;
-  Bills: undefined;
+  Chat: undefined;
+  Notifications: undefined;
+  // Buying: undefined;
+  // Shop: undefined;
+  // Checkout: undefined;
+  // Bills: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const RootNavigator = () => {
+export default function RootNavigator() {
+  const [user, setUser] = useState<User | null>(null);
+  const [initializing, setInitializing] = useState(true);
+
+  useEffect(() => {
+    const sub = onAuthStateChanged(auth, fbUser => {
+      setUser(fbUser);
+      setInitializing(false);
+    });
+    return () => sub();
+  }, []);
+
+  if (initializing) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#020617',
+        }}
+      >
+        <ActivityIndicator size="large" color="#22d3ee" />
+      </View>
+    );
+  }
+
   return (
-    <Stack.Navigator
-      initialRouteName="Onboarding1"
-      screenOptions={{ headerShown: false }}
-    >
-      {/* ONBOARDING FLOW */}
-      <Stack.Screen name="Onboarding1" component={Onboarding1} />
-      <Stack.Screen name="Onboarding2" component={Onboarding2} />
-      <Stack.Screen name="Onboarding3" component={Onboarding3} />
+    <NavigationContainer>
+      {user ? (
+        // đã đăng nhập
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Chat" component={Chat} />
+          <Stack.Screen name="Notifications" component={Notifications} />
+          {/* Buying / Shop / Checkout / Bills thêm ở đây nếu dùng */}
+        </Stack.Navigator>
+      ) : (
+        // chưa đăng nhập
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName="Onboarding1"
+        >
+          <Stack.Screen name="Onboarding1" component={Onboarding1} />
+          <Stack.Screen name="Onboarding2" component={Onboarding2} />
+          <Stack.Screen name="Onboarding3" component={Onboarding3} />
 
-      {/* AUTH FLOW */}
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="Forgot" component={Forgot} />
-
-      {/* APP FLOW */}
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Buying" component={Buying} />
-      <Stack.Screen name="Shop" component={Shop} />
-      <Stack.Screen name="Checkout" component={Checkout} />
-      <Stack.Screen name="Bills" component={Bills} />
-    </Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Forgot" component={Forgot} />
+        </Stack.Navigator>
+      )}
+    </NavigationContainer>
   );
-};
-
-export default RootNavigator;
+}

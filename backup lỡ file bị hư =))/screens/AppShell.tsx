@@ -6,7 +6,7 @@ import Home from './Home';
 import Profile from './Profile';
 import Messages from './Messages';
 import Photos from './Photos';
-import BottomBar from '../components/BottomBar';
+import BottomBar from '../../components/BottomBar';
 
 type TabKey = 'home' | 'profile' | 'messages' | 'photos';
 

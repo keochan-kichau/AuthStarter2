@@ -13,9 +13,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       {/* Chỉ 1 NavigationContainer ở cấp root */}
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <RootNavigator />
     </GestureHandlerRootView>
   );
 }

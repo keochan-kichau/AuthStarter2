@@ -7,7 +7,7 @@ import { RootStackParamList } from '../navigation/RootNavigator';
 import NeonButton from '../components/NeonButton';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
-
+import Onboarding1 from './Onboarding/Onboarding1';
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function Home({ navigation }: Props) {
@@ -19,20 +19,17 @@ export default function Home({ navigation }: Props) {
       case 'profile':
         navigation.navigate('Profile');
         break;
-      case 'buying':
-        navigation.navigate('Buying');
+      case 'chat':
+        navigation.navigate('Chat');
         break;
       case 'home':
         break;
-      case 'bills':
-        navigation.navigate('Bills');
+      case 'notifications':
+        navigation.navigate('Notifications');
         break;
-      case 'logout':
+      case 'nothing':
         await signOut(auth);
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Onboarding1' }],
-        });
+        navigation.navigate('Onboarding1');
         break;
     }
   };
@@ -41,16 +38,13 @@ export default function Home({ navigation }: Props) {
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Xin chào 👋</Text>
-        <Text style={styles.subtitle}>
-          Đây là màn Home sau đăng nhập. Dùng thanh điều hướng phía dưới để
-          chuyển giữa Profile, Mua sắm, Bills hoặc Logout.
-        </Text>
+        <Text style={styles.subtitle}>Home</Text>
 
         <NeonButton
-          label="Đi tới Mua sắm"
+          label="Đi tới Tin nhắn"
           onPress={() => {
-            setActive('buying');
-            navigation.navigate('Buying');
+            setActive('chat');
+            navigation.navigate('Chat');
           }}
           style={{ marginTop: 24 }}
         />

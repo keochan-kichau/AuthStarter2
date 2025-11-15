@@ -12,8 +12,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width } = Dimensions.get('window');
 
-// 5 tab: Profile – Buying – Home – Bills – Logout
-export type BottomTabKey = 'profile' | 'buying' | 'home' | 'bills' | 'logout';
+// 5 tab: Profile – Chat – Home – Notifications – Nothing
+export type BottomTabKey =
+  | 'profile'
+  | 'chat'
+  | 'home'
+  | 'notifications'
+  | 'nothing';
 
 type Props = {
   active: BottomTabKey;
@@ -29,20 +34,25 @@ const TABS: {
   {
     key: 'profile',
     label: 'Profile',
-    icon: 'person-outline',
-    activeIcon: 'person',
-  },
-  { key: 'buying', label: 'Mua sắm', icon: 'cart-outline', activeIcon: 'cart' },
-  { key: 'home', label: 'Home', icon: 'home-outline', activeIcon: 'home' },
-  {
-    key: 'bills',
-    label: 'Bills',
-    icon: 'receipt-outline',
-    activeIcon: 'receipt',
+    icon: 'user',
+    activeIcon: 'user',
   },
   {
-    key: 'logout',
-    label: 'Logout',
+    key: 'chat',
+    label: 'Tin nhắn',
+    icon: 'message1',
+    activeIcon: 'message1',
+  },
+  { key: 'home', label: 'Home', icon: 'home', activeIcon: 'home' },
+  {
+    key: 'notifications',
+    label: 'Thông báo',
+    icon: 'bell-outline',
+    activeIcon: 'bell',
+  },
+  {
+    key: 'nothing',
+    label: 'Nothing',
     icon: 'log-out-outline',
     activeIcon: 'log-out',
   },
